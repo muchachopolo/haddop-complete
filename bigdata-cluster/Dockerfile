@@ -100,7 +100,7 @@ ENV PATH $PATH:$ELASTIC_SEARCH_HOME/bin
 RUN echo "export ELASTIC_SEARCH_HOME=/home/elastic/elasticsearch-7.1.1" >>~/.bash_profile
 RUN echo "export PATH=$PATH:$ELASTIC_SEARCH_HOME/bin" >>~/.bash_profile
 
-#**************************************** INSTALLING elastic search ******************************
+#**************************************** INSTALLING flume search ******************************
 RUN mkdir flume
 RUN wget -P /flume https://downloads.apache.org/flume/1.9.0/apache-flume-1.9.0-bin.tar.gz
 RUN tar -xzvf /flume/apache-flume-1.9.0-bin.tar.gz -C /flume
