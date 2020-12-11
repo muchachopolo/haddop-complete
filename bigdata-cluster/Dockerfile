@@ -109,7 +109,6 @@ ENV FLUME_HOME /flume/apache-flume-1.9.0-bin
 ENV PATH $PATH:$FLUME_HOME/bin
 RUN echo "export FLUME_HOME=/flume/apache-flume-1.9.0-bin" >>~/.bash_profile
 RUN echo "export PATH=$PATH:$FLUME_HOME/bin" >>~/.bash_profile
-RUN flume-ng version
 
 #********************************************* Moving ~/.bash_profile to /etc/profile.d/ to get env variables to all users ****************
 RUN cp ~/.bash_profile /etc/profile.d/bash_profile.sh
