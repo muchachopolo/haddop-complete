@@ -29,5 +29,7 @@ $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties &
 sudo -u elastic $ELASTIC_SEARCH_HOME/bin/elasticsearch &
 echo $! > elsaticsearch-pid.txt
 
+sudo ./get-telegram-updates.sh
+
 # To keep container running
-tail -f /dev/null 
+tail -f /dev/null

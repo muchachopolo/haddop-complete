@@ -100,7 +100,7 @@ ENV PATH $PATH:$ELASTIC_SEARCH_HOME/bin
 RUN echo "export ELASTIC_SEARCH_HOME=/home/elastic/elasticsearch-7.1.1" >>~/.bash_profile
 RUN echo "export PATH=$PATH:$ELASTIC_SEARCH_HOME/bin" >>~/.bash_profile
 
-#**************************************** INSTALLING flume search ******************************
+#**************************************** INSTALLING flume ******************************
 RUN mkdir flume
 RUN wget -P /flume https://downloads.apache.org/flume/1.9.0/apache-flume-1.9.0-bin.tar.gz
 RUN tar -xzvf /flume/apache-flume-1.9.0-bin.tar.gz -C /flume
@@ -126,6 +126,7 @@ ADD ./config/start-nifi.sh .
 ADD ./config/start-kafka.sh .
 ADD ./config/sqoop-import-example.sh .
 ADD ./config/sqoop-export-example.sh .
+ADD ./config/get-telegram-updates.sh .
 
 RUN chmod +x ./start-ecosystem.sh
 RUN chmod +x ./stop-all.sh
@@ -140,3 +141,7 @@ RUN chmod +x ./start-nifi.sh
 RUN chmod +x ./start-kafka.sh
 RUN chmod +x ./sqoop-import-example.sh
 RUN chmod +x ./sqoop-export-example.sh
+RUN chmod +x ./get-telegram-updates.sh
+
+# Run the command on container startup
+CMD cron
