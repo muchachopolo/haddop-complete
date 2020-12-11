@@ -102,8 +102,9 @@ RUN echo "export PATH=$PATH:$ELASTIC_SEARCH_HOME/bin" >>~/.bash_profile
 
 #**************************************** INSTALLING elastic search ******************************
 RUN mkdir flume
-RUN wget -P /flume http://www.apache.org/dyn/closer.lua/flume/1.9.0/apache-flume-1.9.0-bin.tar.gz
-RUN tar -xzvf /flume/apache-flume-1.9.0-bin.tar.gz -C /flume
+RUN wget https://downloads.apache.org/flume/1.9.0/apache-flume-1.9.0-bin.tar.gz
+RUN tar xzf apache-flume-1.9.0-bin.tar.gz
+RUN mv apache-flume-1.9.0-bin /usr/local/flume
 ENV FLUME_HOME /flume/apache-flume-1.9.0-bin
 ENV PATH $PATH:$FLUME_HOME/bin
 RUN echo "export FLUME_HOME=/flume/apache-flume-1.9.0-bin" >>~/.bash_profile
