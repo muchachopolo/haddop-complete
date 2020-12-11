@@ -1,0 +1,1 @@
+/sqoop/sqoop-1.4.7.bin__hadoop-2.6.0/bin/sqoop export --connect "jdbc:sqlserver://mssql-db:1433;database=TestData;username=sa;password=password!1" --table ExportedRecords --export-dir /user/root/ROLES
