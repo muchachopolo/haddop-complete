@@ -110,6 +110,9 @@ RUN echo "export FLUME_HOME=/flume/apache-flume-1.9.0-bin" >>~/.bash_profile
 RUN echo "export PATH=$PATH:$FLUME_HOME/bin" >>~/.bash_profile
 RUN flume-ng version
 
+#**************************************** INSTALLING curl ******************************
+RUN apt-get -y install curl
+
 #********************************************* Moving ~/.bash_profile to /etc/profile.d/ to get env variables to all users ****************
 RUN cp ~/.bash_profile /etc/profile.d/bash_profile.sh
 #**************************************** load script to start/stop the ecosystem ******************************
@@ -127,6 +130,7 @@ ADD ./config/start-kafka.sh .
 ADD ./config/sqoop-import-example.sh .
 ADD ./config/sqoop-export-example.sh .
 ADD ./config/get-telegram-updates.sh .
+ADD ./config/flume.properties ./flume/apache-flume-1.9.0-bin/conf/
 
 RUN chmod +x ./start-ecosystem.sh
 RUN chmod +x ./stop-all.sh
@@ -142,6 +146,3 @@ RUN chmod +x ./start-kafka.sh
 RUN chmod +x ./sqoop-import-example.sh
 RUN chmod +x ./sqoop-export-example.sh
 RUN chmod +x ./get-telegram-updates.sh
-
-# Run the command on container startup
-CMD cron
