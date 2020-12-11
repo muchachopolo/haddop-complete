@@ -1,0 +1,1 @@
+flume-ng agent --conf conf --conf-file $FLUME_HOME/conf/flume.properties --name agent1 Dflume.root.logger=INFO,console
