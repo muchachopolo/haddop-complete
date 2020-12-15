@@ -34,6 +34,18 @@ services:
     - "8080:8080"
     networks:
       - bigdata-cluster-network
+  jupiter-cluster:
+    image: jupyter/scipy-notebook:17aba6048f44
+    restart: always
+    container_name: jupiter-cluster
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./jupiter-workspace:/home/jovyan
+    networks:
+      - bigdata-cluster-network
 networks:
   bigdata-cluster-network:
     name : bigdata-cluster-network
