@@ -28,6 +28,24 @@ RUN conda install --quiet --yes --satisfied-skip-solve \
     fix-permissions "/home/${NB_USER}"
 
 RUN pip install paramiko
+RUN pip install sparkmagic
+RUN jupyter nbextension enable --py --sys-prefix widgetsnbextension
+RUN jupyter labextension install "@jupyter-widgets/jupyterlab-manager"
+RUN pip show sparkmagic
 
+USER root
+RUN jupyter-kernelspec install /opt/conda/lib/python3.8/site-packages/sparkmagic/kernels/sparkkernel
+RUN jupyter-kernelspec install /opt/conda/lib/python3.8/site-packages/sparkmagic/kernels/pysparkkernel
+RUN jupyter-kernelspec install /opt/conda/lib/python3.8/site-packages/sparkmagic/kernels/sparkrkernel
+USER $NB_UID
+
+RUN jupyter serverextension enable --py sparkmagic
 RUN whoami
+
+RUN pip install dash==0.21.1
+RUN pip install dash-renderer==0.13.0
+RUN pip install dash-html-components==0.11.0
+RUN pip install dash-core-components==0.23.0
+RUN pip install dash-auth==1.0.0
+RUN pip install plotly --upgrade
 WORKDIR $HOME

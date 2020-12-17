@@ -118,6 +118,16 @@ RUN echo "export PATH=$PATH:$FLUME_HOME/bin" >>~/.bash_profile
 RUN flume-ng version
 RUN rm /flume/apache-flume-1.9.0-bin.tar.gz
 
+#**************************************** INSTALLING Livy ******************************
+RUN apt-get -y install unzip
+RUN mkdir Livy
+RUN wget -P /Livy https://downloads.apache.org/incubator/livy/0.7.0-incubating/apache-livy-0.7.0-incubating-bin.zip
+RUN unzip -a /Livy/apache-livy-0.7.0-incubating-bin.zip
+ENV LIVY_HOME /apache-livy-0.7.0-incubating-bin
+ENV PATH $PATH:$LIVY_HOME/bin
+RUN echo "export LIVY_HOME=/apache-livy-0.7.0-incubating-bin" >>~/.bash_profile
+RUN echo "export PATH=$PATH:$LIVY_HOME/bin" >>~/.bash_profile
+RUN mkdir $LIVY_HOME/logs
 #**************************************** INSTALLING curl ******************************
 RUN apt-get -y install curl
 
@@ -154,6 +164,3 @@ RUN chmod +x ./start-kafka.sh
 RUN chmod +x ./sqoop-import-example.sh
 RUN chmod +x ./sqoop-export-example.sh
 RUN chmod +x ./get-telegram-updates.sh
-
-#**************************************** COPY NEW CONFIG ******************************
-COPY ./config/core-site-for-jupiter.xml ./hadoop/hadoop-2.7.7/etc/hadoop/core-site.xml

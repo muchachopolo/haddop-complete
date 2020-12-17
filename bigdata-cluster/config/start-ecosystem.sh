@@ -30,6 +30,6 @@ sudo -u elastic $ELASTIC_SEARCH_HOME/bin/elasticsearch &
 echo $! > elsaticsearch-pid.txt
 
 #sudo ./get-telegram-updates.sh
-
+$LIVY_HOME/bin/livy-server
 # To keep container running
 tail -f /dev/null
