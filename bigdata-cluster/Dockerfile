@@ -37,6 +37,7 @@ ENV PATH $PATH:$HADOOP_HOME/bin
 RUN echo "export HADOOP_HOME=/hadoop/hadoop-2.7.7" >>~/.bash_profile
 RUN echo "export PATH=$PATH:$HADOOP_HOME/bin" >>~/.bash_profile
 RUN $HADOOP_HOME/bin/hdfs namenode -format
+RUN rm /hadoop/hadoop-2.7.7.tar.gz
 
 #**************************************** INSTALLING hive and configure ******************************
 RUN mkdir hive
@@ -49,6 +50,7 @@ ENV HIVE_HOME /hive/apache-hive-1.2.1-bin
 ENV PATH $PATH:$HIVE_HOME/bin
 RUN echo "export HIVE_HOME=/hive/apache-hive-1.2.1-bin" >>~/.bash_profile
 RUN echo "export PATH=$PATH:$HIVE_HOME/bin" >>~/.bash_profile
+RUN rm /hive/apache-hive-1.2.1-bin.tar.gz
 
 #**************************************** INSTALLING spark and configure ******************************
 RUN apt-get -y install scala
@@ -63,6 +65,7 @@ ENV PATH $PATH:$SPARK_HOME/bin
 RUN echo "export SPARK_HOME=/spark/spark-2.4.7-bin-hadoop2.7" >>~/.bash_profile
 RUN echo "export PATH=$PATH:$SPARK_HOME/bin" >>~/.bash_profile
 RUN apt-get -y install python2.7 python-pip
+RUN rm /spark/spark-2.4.7-bin-hadoop2.7.tgz
 
 #**************************************** INSTALLING sqoop and configure ******************************
 RUN mkdir sqoop
@@ -73,12 +76,14 @@ ENV SQOOP_HOME /sqoop/sqoop-1.4.7.bin__hadoop-2.6.0
 ENV PATH $PATH:$SQOOP_HOME/bin
 RUN echo "export SQOOP_HOME=/sqoop/sqoop-1.4.7.bin__hadoop-2.6.0" >>~/.bash_profile
 RUN echo "export PATH=$PATH:$SQOOP_HOME/bin" >>~/.bash_profile
+RUN rm /sqoop/sqoop-1.4.7.bin__hadoop-2.6.0.tar.gz
 
 #**************************************** INSTALLING NiFi and configure ******************************
 RUN mkdir nifi
 RUN wget -P /nifi http://mirrors.estointernet.in/apache/nifi/1.12.1/nifi-1.12.1-bin.tar.gz
 RUN tar -xzvf /nifi/nifi-1.12.1-bin.tar.gz -C /nifi
 RUN /nifi/nifi-1.12.1/bin/nifi.sh install
+RUN rm /nifi/nifi-1.12.1-bin.tar.gz
 
 #**************************************** INSTALLING Kafka and configure ******************************
 RUN mkdir kafka
@@ -88,6 +93,7 @@ ENV KAFKA_HOME /kafka/kafka_2.11-2.2.2
 ENV PATH $PATH:$KAFKA_HOME/bin
 RUN echo "export KAFKA_HOME=/kafka/kafka_2.11-2.2.0" >>~/.bash_profile
 RUN echo "export PATH=$PATH:$KAFKA_HOME/bin" >>~/.bash_profile
+RUN rm /kafka/kafka_2.11-2.2.2.tgz
 
 #**************************************** INSTALLING elastic search ******************************
 RUN useradd -m  -s /bin/bash elastic
@@ -99,6 +105,7 @@ ENV ELASTIC_SEARCH_HOME /home/elastic/elasticsearch-7.1.1
 ENV PATH $PATH:$ELASTIC_SEARCH_HOME/bin
 RUN echo "export ELASTIC_SEARCH_HOME=/home/elastic/elasticsearch-7.1.1" >>~/.bash_profile
 RUN echo "export PATH=$PATH:$ELASTIC_SEARCH_HOME/bin" >>~/.bash_profile
+RUN rm /home/elastic/elasticsearch-7.1.1-linux-x86_64.tar.gz
 
 #**************************************** INSTALLING flume ******************************
 RUN mkdir flume
@@ -109,6 +116,7 @@ ENV PATH $PATH:$FLUME_HOME/bin
 RUN echo "export FLUME_HOME=/flume/apache-flume-1.9.0-bin" >>~/.bash_profile
 RUN echo "export PATH=$PATH:$FLUME_HOME/bin" >>~/.bash_profile
 RUN flume-ng version
+RUN rm /flume/apache-flume-1.9.0-bin.tar.gz
 
 #**************************************** INSTALLING curl ******************************
 RUN apt-get -y install curl
@@ -146,3 +154,6 @@ RUN chmod +x ./start-kafka.sh
 RUN chmod +x ./sqoop-import-example.sh
 RUN chmod +x ./sqoop-export-example.sh
 RUN chmod +x ./get-telegram-updates.sh
+
+#**************************************** COPY NEW CONFIG ******************************
+COPY ./config/core-site-for-jupiter.xml ./hadoop/hadoop-2.7.7/etc/hadoop/core-site.xml
