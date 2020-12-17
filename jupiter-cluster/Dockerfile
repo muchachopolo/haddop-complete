@@ -27,5 +27,7 @@ RUN conda install --quiet --yes --satisfied-skip-solve \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
+RUN pip install paramiko
+
 RUN whoami
 WORKDIR $HOME
