@@ -48,4 +48,13 @@ RUN pip install dash-html-components==0.11.0
 RUN pip install dash-core-components==0.23.0
 RUN pip install dash-auth==1.0.0
 RUN pip install plotly --upgrade
+
+RUN pip install jupyter-dash
+
+RUN conda install plotly &&\
+    conda install jupyter-dash &&\
+    conda install wordcloud
+
+RUN jupyter lab build
+
 WORKDIR $HOME

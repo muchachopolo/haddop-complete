@@ -45,6 +45,7 @@ services:
     ports:
       - "8888:8888"
       - "8050:8050"
+      - "8889:8889"
     volumes:
       - ./jupiter-workspace:/home/jovyan
     networks:
